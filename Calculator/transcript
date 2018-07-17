@@ -1,0 +1,221 @@
+# Reading C:/intelFPGA_lite/17.0/modelsim_ase/tcl/vsim/pref.tcl
+# Loading project display_cal
+# reading C:/intelFPGA_lite/17.0/modelsim_ase/win32aloem/../modelsim.ini
+# Loading project display_cal
+# reading C:/intelFPGA_lite/17.0/modelsim_ase/win32aloem/../modelsim.ini
+# Loading project display_cal
+# Load canceled
+# Compile of calculator.vhd was successful.
+# Compile of leddcd.vhd was successful.
+# Compile of calc_const.vhd was successful.
+# Compile of decoder.vhd was successful.
+# Compile of display_calc.vhd was successful.
+# 5 compiles, 0 failed with no errors.
+vsim -gui work.calculator_tb
+# vsim -gui work.calculator_tb 
+# Start time: 11:05:18 on Oct 02,2017
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_textio(body)
+# Loading ieee.numeric_std(body)
+# Loading work.calc_const(body)
+# Loading work.decoder(body)
+# Loading work.calculator_tb(behavioral)
+# Loading work.calculator(behavioral)
+add wave -r sim:/calculator_tb/*
+run
+# ** Warning: NUMERIC_STD.TO_SIGNED: vector truncated
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# Load canceled
+restart -f
+run
+# ** Warning: NUMERIC_STD.TO_SIGNED: vector truncated
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+restart -f
+run
+# ** Warning: NUMERIC_STD.TO_SIGNED: vector truncated
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+run
+run
+restart -f
+run
+# ** Warning: NUMERIC_STD.TO_SIGNED: vector truncated
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# Compile of calculator.vhd was successful.
+# Compile of leddcd.vhd was successful.
+# Compile of calc_const.vhd was successful.
+# Compile of decoder.vhd was successful.
+# Compile of display_calc.vhd was successful.
+# Compile of calculator_tb.vhd was successful.
+# 6 compiles, 0 failed with no errors.
+# Compile of calculator.vhd was successful.
+# Compile of leddcd.vhd was successful.
+# Compile of calc_const.vhd was successful.
+# Compile of decoder.vhd was successful.
+# Compile of display_calc.vhd was successful.
+# Compile of calculator_tb.vhd was successful.
+# 6 compiles, 0 failed with no errors.
+vsim -gui work.calculator_tb
+# End time: 11:16:08 on Oct 02,2017, Elapsed time: 0:10:50
+# Errors: 1, Warnings: 12
+# vsim -gui work.calculator_tb 
+# Start time: 11:16:09 on Oct 02,2017
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_textio(body)
+# Loading ieee.numeric_std(body)
+# Loading work.calc_const(body)
+# Loading work.decoder(body)
+# Loading work.calculator_tb(behavioral)
+# Loading work.calculator(behavioral)
+add wave -r sim:/calculator_tb/*
+run
+# ** Warning: NUMERIC_STD.TO_SIGNED: vector truncated
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# Compile of calculator.vhd was successful.
+# Compile of leddcd.vhd was successful.
+# Compile of calc_const.vhd was successful.
+# Compile of decoder.vhd was successful.
+# Compile of display_calc.vhd was successful.
+# Compile of calculator_tb.vhd was successful.
+# 6 compiles, 0 failed with no errors.
+vsim -gui work.calculator_tb
+# End time: 11:30:45 on Oct 02,2017, Elapsed time: 0:14:36
+# Errors: 0, Warnings: 3
+# vsim -gui work.calculator_tb 
+# Start time: 11:30:45 on Oct 02,2017
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_textio(body)
+# Loading ieee.numeric_std(body)
+# Loading work.calc_const(body)
+# Loading work.decoder(body)
+# Loading work.calculator_tb(behavioral)
+# Loading work.calculator(behavioral)
+add wave -r sim:/calculator_tb/*
+run
+# ** Warning: NUMERIC_STD.TO_SIGNED: vector truncated
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /calculator_tb/P1
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
