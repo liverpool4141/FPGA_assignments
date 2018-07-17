@@ -1,0 +1,57 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use WORK.quantize.all;
+use WORK.parameters.all;
+
+entity fir_n is
+port(
+	x_in	: in	int_array (0 to samples-1);
+	coeff	: in	int_array;
+	taps	: in	integer;
+	decim	: in	integer;
+	y_out	: out int_array
+);
+end entity fir_n;
+
+
+architecture behavior of fir_n is
+begin
+
+process (x_in)
+	variable x : int_array (0 to max_taps-1);
+	variable j : integer;
+	variable elem : integer;
+	variable y : integer;
+begin
+	elem:=samples/decim;
+	j:=0;
+	for n in 0 to samples/decim-1 loop
+		y_out(n)<=0;
+	end loop;
+	
+	for l in 0 to max_taps-1 loop
+		x(l) :=0;
+	end loop;
+	
+	for i in 0 to elem-1 loop
+		y:=0;
+		for k in decim to taps-1 loop
+			x(decim+taps-1-k) := x(taps-1-k);
+		end loop;
+		
+		for n in 0 to decim-1 loop
+			x(decim-n-1) := x_in(n+j);
+		end loop;
+		
+		for k in 0 to taps-1 loop
+			y:=y+dequantize(coeff(taps-k-1)*x(k));
+		end loop;
+		
+		y_out(i)<=y;
+		j:=j+decim;
+	
+	end loop;
+end process;
+
+end architecture behavior;

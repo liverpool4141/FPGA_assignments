@@ -1,0 +1,199 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use WORK.quantize.all;
+use WORK.parameters.all;
+use WORK.compute.all;
+
+entity fm_radio_stereo is
+port(
+	IQ		: in	char_array (0 to samples*4-1);
+	left_audio	: out int_array (0 to audio_samples-1);
+	right_audio	: out int_array (0 to audio_samples-1)
+);
+end entity fm_radio_stereo;
+
+
+
+architecture structural of fm_radio_stereo is
+
+	signal I			: int_array(0 to samples-1);
+	signal Q			: int_array(0 to samples-1);
+	signal I_fir	: int_array(0 to samples-1);
+	signal Q_fir	: int_array(0 to samples-1);
+	signal demod	: int_array (0 to samples-1);
+	signal audio_lpr_filter	:int_array(0 to AUDIO_SAMPLES-1);
+	signal bp_lmr_filter	: int_array(0 to samples-1);
+	signal bp_pilot_filter	: int_array(0 to samples-1);
+	signal square	: int_array(0 to samples-1);
+	signal hp_pilot_filter	: int_array(0 to samples-1);
+	signal multiply	:int_array (0 to samples-1);
+	signal audio_lmr_filter	:int_array(0 to audio_samples-1);
+	signal leftn	: int_array(0 to audio_samples-1);
+	signal rightn	: int_array(0 to audio_samples-1);
+	signal left_deemph	: int_array(0 to audio_samples-1);
+	signal right_deemph	: int_array(0 to audio_samples-1);
+
+	component read_IQ is
+	port(
+		IQ	: in		char_array (0 to SAMPLES*4-1);
+		num	: in	integer;
+		I	: out	int_array (0 to samples-1);
+		Q	: out	int_array (0 to samples-1)
+	);
+	end component;
+	
+	component fir_cmplx_n is
+	port(
+		I	: in	int_array (0 to samples-1);
+		Q	: in	int_array (0 to samples-1);
+		num	: in	integer;
+		I_fir	: out int_array (0 to samples-1);
+		Q_fir	: out int_array (0 to samples-1)
+	);
+	end component;
+	
+	component demodulate_n is
+	port
+	(
+		I_fir	: in	int_array (0 to samples-1);
+		Q_fir	: in	int_array (0 to samples-1);
+		num	: in	integer;
+		demod	: out int_array (0 to samples-1)
+	);
+	end component demodulate_n;
+	
+	component fir_n is
+	port(
+		x_in	: in	int_array (0 to samples-1);
+		coeff	: in	int_array;
+		taps	: in	integer;
+		decim	: in	integer;
+		y_out	: out int_array
+	);
+	end component fir_n;
+	
+	component deemphasis_n is
+	port
+	(
+	x_in	: in	int_array(0 to audio_samples-1);
+	y_out	: out int_array(0 to audio_samples-1)
+	);
+	end component deemphasis_n;
+	
+	
+begin
+
+read_IQ_inst:
+component read_IQ
+port map
+(
+	IQ	=> IQ,
+	num =>samples,
+	I	=> I,
+	Q	=> Q
+);
+
+fir_cmplx_n_inst:
+component fir_cmplx_n
+port map
+(
+	I => I,
+	Q => Q,
+	num => samples,
+	I_fir=>I_fir,
+	Q_fir=>Q_fir
+);
+
+demodulate_n_inst:
+component demodulate_n
+port map
+(
+	I_fir	=>I_fir,
+	Q_fir	=>Q_fir,
+	num	=>samples,
+	demod	=> demod
+);
+
+fir_lpr_inst:
+component fir_n
+port map
+(
+	x_in =>demod,
+	coeff=>AUDIO_LPR_COEFFS,
+	taps=>AUDIO_LPR_COEFF_TAPS,
+	decim=>AUDIO_DECIM,
+	y_out=>audio_lpr_filter
+);
+
+bp_lmr_inst:
+component fir_n
+port map
+(
+	x_in =>demod,
+	coeff=>bp_lmr_COEFFS,
+	taps=>bp_lmr_COEFF_TAPS,
+	decim=>1,
+	y_out=>bp_lmr_filter
+);
+
+bp_pilot_inst:
+component fir_n
+port map
+(
+	x_in =>demod,
+	coeff=>bp_pilot_COEFFS,
+	taps=>bp_pilot_COEFF_TAPS,
+	decim=>1,
+	y_out=>bp_pilot_filter
+);
+
+square<=multiply_n(bp_pilot_filter,bp_pilot_filter,samples);
+
+fir_hp_inst:
+component fir_n
+port map
+(
+	x_in =>square,
+	coeff=>hp_coeffs,
+	taps=>hp_coeff_taps,
+	decim=>1,
+	y_out=>hp_pilot_filter
+);
+
+multiply<=multiply_n(hp_pilot_filter,bp_lmr_filter,samples);
+
+fir_lmr_inst:
+component fir_n
+port map
+(
+	x_in =>multiply,
+	coeff=>audio_lmr_coeffs,
+	taps=>audio_lmr_coeff_taps,
+	decim=>audio_decim,
+	y_out=>audio_lmr_filter
+);
+
+leftn<=add_n(audio_lpr_filter,audio_lmr_filter,audio_samples);
+rightn<=sub_n(audio_lpr_filter,audio_lmr_filter,audio_samples);
+
+left_deemph_inst:
+component deemphasis_n
+port map
+(
+	x_in=>leftn,
+	y_out=>left_deemph
+);
+
+right_deemph_inst:
+component deemphasis_n
+port map
+(
+	x_in=>rightn,
+	y_out=>right_deemph
+);
+
+left_audio<=gain_n(left_deemph,audio_samples,volume_level);
+right_audio<=gain_n(right_deemph,audio_samples,volume_level);
+
+end architecture structural;

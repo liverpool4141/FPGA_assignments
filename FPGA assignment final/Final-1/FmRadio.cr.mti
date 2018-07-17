@@ -1,0 +1,137 @@
+C:/Users/Jenas/Desktop/Final/fir_cmplx_n.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Jenas/Desktop/Final/fir_cmplx_n.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5c Compiler 2017.01 Jan 23 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package quantize
+-- Loading package parameters
+-- Compiling entity fir_cmplx_n
+-- Compiling architecture behavior of fir_cmplx_n
+
+} {} {}} C:/Users/Jenas/Desktop/Final/fm_radio_top.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Jenas/Desktop/Final/fm_radio_top.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5c Compiler 2017.01 Jan 23 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_arith
+-- Loading package quantize
+-- Loading package parameters
+-- Loading package compute
+-- Compiling entity fm_radio_top
+-- Compiling architecture structural of fm_radio_top
+
+} {} {}} C:/Users/Jenas/Desktop/Final/parameters.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Jenas/Desktop/Final/parameters.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5c Compiler 2017.01 Jan 23 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package quantize
+-- Compiling package parameters
+-- Compiling package body parameters
+-- Loading package parameters
+
+} {} {}} C:/Users/Jenas/Desktop/Final/read_IQ.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Jenas/Desktop/Final/read_IQ.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5c Compiler 2017.01 Jan 23 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package quantize
+-- Loading package parameters
+-- Compiling entity read_IQ
+-- Compiling architecture behavior of read_IQ
+
+} {} {}} C:/Users/Jenas/Desktop/Final/compute.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Jenas/Desktop/Final/compute.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5c Compiler 2017.01 Jan 23 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package quantize
+-- Loading package parameters
+-- Compiling package compute
+-- Compiling package body compute
+-- Loading package compute
+
+} {} {}} C:/Users/Jenas/Desktop/Final/fm_radio_tb.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Jenas/Desktop/Final/fm_radio_tb.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5c Compiler 2017.01 Jan 23 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_arith
+-- Loading package quantize
+-- Loading package parameters
+-- Loading package compute
+-- Compiling entity fm_radio_tb
+-- Compiling architecture behavior of fm_radio_tb
+
+} {} {}} C:/Users/Jenas/Desktop/Final/deemphasis_n.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Jenas/Desktop/Final/deemphasis_n.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5c Compiler 2017.01 Jan 23 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package quantize
+-- Loading package parameters
+-- Compiling entity deemphasis_n
+-- Compiling architecture behavior of deemphasis_n
+
+} {} {}} C:/Users/Jenas/Desktop/Final/demodulate_n.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Jenas/Desktop/Final/demodulate_n.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5c Compiler 2017.01 Jan 23 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package quantize
+-- Loading package parameters
+-- Compiling entity demodulate_n
+-- Compiling architecture behavior of demodulate_n
+
+} {} {}} C:/Users/Jenas/Desktop/Final/quantize.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Jenas/Desktop/Final/quantize.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5c Compiler 2017.01 Jan 23 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling package quantize
+-- Compiling package body quantize
+-- Loading package quantize
+
+} {} {}} C:/Users/Jenas/Desktop/Final/fm_radio_stereo.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Jenas/Desktop/Final/fm_radio_stereo.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5c Compiler 2017.01 Jan 23 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package quantize
+-- Loading package parameters
+-- Loading package compute
+-- Compiling entity fm_radio_stereo
+-- Compiling architecture structural of fm_radio_stereo
+
+} {} {}} C:/Users/Jenas/Desktop/Final/fifo.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Jenas/Desktop/Final/fifo.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5c Compiler 2017.01 Jan 23 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_textio
+-- Compiling entity fifo
+-- Compiling architecture behavior of fifo
+
+} {} {}} C:/Users/Jenas/Desktop/Final/fir_n.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Jenas/Desktop/Final/fir_n.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5c Compiler 2017.01 Jan 23 2017
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package quantize
+-- Loading package parameters
+-- Compiling entity fir_n
+-- Compiling architecture behavior of fir_n
+
+} {} {}}

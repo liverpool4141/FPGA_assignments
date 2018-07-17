@@ -1,0 +1,194 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use STD.textio.all;
+use IEEE.std_logic_arith.all;
+use WORK.quantize.all;
+use WORK.parameters.all;
+use WORK.compute.all;
+
+entity fm_radio_top is
+port
+(
+	clock	: in std_logic;
+	reset	: in std_logic;
+	
+	in_rd_en	: in std_logic :='0';
+	in_wr_en	: in std_logic :='0';
+	in_din		: in std_logic_vector (7 downto 0);
+	in_full		: out std_logic;
+	in_empty	: out std_logic;
+	out_rd_en	: in std_logic :='0';
+	out_wr_en	: in std_logic :='0';
+	left_dout	: out std_logic_vector (31 downto 0);
+	left_full	: out std_logic;
+	left_empty	: out std_logic;
+	right_dout	: out std_logic_vector (31 downto 0);
+	right_full	: out std_logic;
+	right_empty	: out std_logic;
+	in_read_done	: in std_logic;
+	out_read_done	: in std_logic
+);
+
+end entity fm_radio_top;
+
+
+architecture structural of fm_radio_top is
+	
+	signal	IQ		:char_array(0 to samples*4-1):=(others=> (others=>'0'));
+	signal	left_audio	:int_array(0 to audio_samples-1);
+	signal	right_audio	:int_array(0 to audio_samples-1);
+	signal	in_dout		:std_logic_vector (7 downto 0):="00000000";
+	signal	left_din	:std_logic_vector (31 downto 0):="00000000000000000000000000000000";
+	signal	right_din	:std_logic_vector (31 downto 0):="00000000000000000000000000000000";
+
+	component fifo is
+	generic 
+	(
+		constant FIFO_DATA_WIDTH : integer := 8;
+		constant FIFO_BUFFER_SIZE : integer := 64
+	);
+	port 
+	(
+		signal rd_clk	: in std_logic;
+		signal wr_clk	: in std_logic;
+		signal reset	: in std_logic;
+		signal rd_en	: in std_logic;
+		signal wr_en	: in std_logic;
+		signal din	: in std_logic_vector ((FIFO_DATA_WIDTH - 1) downto 0);
+		signal dout	: out std_logic_vector ((FIFO_DATA_WIDTH - 1) downto 0);
+		signal full	: out std_logic;
+		signal empty	: out std_logic
+	);
+	end component fifo;
+
+	component fm_radio_stereo is
+	port(
+	IQ		: in	char_array (0 to samples*4-1);
+	left_audio	: out int_array (0 to audio_samples-1);
+	right_audio	: out int_array (0 to audio_samples-1)
+	);
+	end component fm_radio_stereo;
+
+begin
+
+input_fifo_inst :
+component fifo
+generic map
+(
+	FIFO_DATA_WIDTH		=> 8,
+	FIFO_BUFFER_SIZE	=> 16
+)
+port map
+(
+	rd_clk	=> clock,
+	wr_clk	=> clock,
+	reset	=> reset,
+	rd_en 	=> in_rd_en,
+	wr_en 	=> in_wr_en,
+	din	=> in_din,
+	dout 	=> in_dout,
+	full 	=> in_full,
+	empty 	=> in_empty
+);
+
+left_audio_fifo_inst :
+component fifo
+generic map
+(
+	FIFO_DATA_WIDTH 	=> 32,
+	FIFO_BUFFER_SIZE	=> 64
+)
+port map
+(
+	rd_clk	=> clock,
+	wr_clk	=> clock,
+	reset	=> reset,
+	rd_en 	=> out_rd_en,
+	wr_en 	=> out_wr_en,
+	din 	=> left_din,
+	dout 	=> left_dout,
+	full 	=> left_full,
+	empty 	=> left_empty
+);
+
+
+right_audio_fifo_inst :
+component fifo
+generic map
+(
+	FIFO_DATA_WIDTH 	=> 32,
+	FIFO_BUFFER_SIZE	=> 64
+)
+port map
+(
+	rd_clk	=> clock,
+	wr_clk	=> clock,
+	reset	=> reset,
+	rd_en 	=> out_rd_en,
+	wr_en 	=> out_wr_en,
+	din 	=> right_din,
+	dout 	=> right_dout,
+	full 	=> right_full,
+	empty 	=> right_empty
+);
+
+
+fm_radio_inst:
+component fm_radio_stereo
+port map
+(
+	IQ	=> IQ,
+	left_audio	=> left_audio,
+	right_audio	=> right_audio
+);
+
+
+input_fifo_to_signal_process:
+process
+	variable i : integer:=0;
+	variable IQ_temp	: char_array(0 to samples*4-1):=(others=> (others=>'0'));
+begin
+	wait until (reset = '1');
+	wait until (reset = '0');
+	wait until (in_rd_en='1');
+	wait until (clock='0');
+	while ( in_read_done = '0') loop
+		wait until (clock='1');
+		wait until (clock='0');
+		IQ_temp(i):=in_dout;
+		i:=i+1;
+		if (i=samples*4) then
+			i:=0;
+			IQ<=IQ_temp;
+		end if;
+	end loop;
+	IQ<=IQ_temp;
+	wait until (in_rd_en='0');
+end process input_fifo_to_signal_process;
+
+
+result_to_output_fifo_process:
+process
+begin
+	wait until (reset = '1');
+	wait until (reset = '0');
+	while (in_read_done='0') loop
+		wait until (out_wr_en='1');
+		wait until (clock='1');--
+		wait until (clock='0');--
+		for i in 0 to audio_samples-1 loop
+			wait until (clock='1');
+			left_din<=std_logic_vector(to_signed(left_audio(i),32));
+			right_din<=std_logic_vector(to_signed(right_audio(i),32));
+			wait until (clock='0');
+		end loop;
+		wait until (out_wr_en='0');
+	end loop;
+	wait until (clock='0');
+	wait until(out_read_done = '1');
+	wait;
+end process result_to_output_fifo_process;
+
+
+end architecture structural;
